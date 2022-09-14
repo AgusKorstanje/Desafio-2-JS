@@ -30,7 +30,6 @@ alumno = alumno.toUpperCase("");
 while(alumno != "ESC"){
     nota1 = parseInt(prompt("PARCIAL 1"));
     limites(nota1);
-    alert(`${nota1}`);
     examen = examen + 1;
     nota2 = parseInt(prompt("PARCIAL 2"));
     limites(nota2);
