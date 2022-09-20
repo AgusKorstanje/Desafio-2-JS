@@ -2,13 +2,12 @@ let examen = 1;
 let nota1;
 let nota2;
 let notarec; /*nota recuperatorio*/
-let notaf;
-let final;  
+let notaf; 
 let mensajef;   /*mensaje final*/
 let nombre;
 
 function limites (valor){
-    while( valor < 0 || valor > 10 || valor == isNaN){
+    while( valor < 0 || valor > 10 || isNaN(valor)){
         alert("nota no valida")
         if(examen === 1){
             valor = parseInt(prompt("PARCIAL 1"));
@@ -23,14 +22,12 @@ function limites (valor){
             valor = parseInt(prompt("nota del final"));
         }
     }
-    examen ++;
     return valor;
 }
 
 function notafinal(){
-    final = parseInt(prompt("nota del final"));
-    limites(final);
-    return final;
+    let final = parseInt(prompt("nota del final"));
+    return limites(final);
 }
 
 function alumno (){
@@ -41,11 +38,13 @@ function alumno (){
 
 function promediador(){
     alumno();
-    while(alumno != "ESC"){
+    if(alumno != "ESC"){
         nota1 = parseInt(prompt("PARCIAL 1"));
         nota1 = limites(nota1);
+        examen ++;
         nota2 = parseInt(prompt("PARCIAL 2"));
         nota2 = limites(nota2);
+        examen ++;
         notaf = nota1 + nota2;
         /* la nota llega para final?? */
         if(notaf < 8 || nota1 == 1 || nota2 == 1){
@@ -64,22 +63,25 @@ function promediador(){
         }
         /* nota final del alumno */
         notaf = nota1 + nota2;
-        if(notaf < 8){
-            alert("desaprobaste");
-            notaf = parseInt((nota1 + nota2)/2);
-        }
-        else if(notaf < 13) {
-            alert("vas a final");
-            final = notafinal();
-            notaf = final;
-        }
-        else {
-            alert("promocionaste")
-            notaf = Math.round((nota1 + nota2)/2);
-        }
-        mensajef = alert(`la nota final de ${nombre} es ${notaf}`);
-        alumno();
+        examen ++;
     }
 }
 
+function mensaje(){
+    if(notaf < 8){
+        alert("desaprobaste");
+        notaf = parseInt((nota1 + nota2)/2);
+    }
+    else if(notaf < 13) {
+        alert("vas a final");
+        notaf = notafinal();
+    }
+    else {
+        alert("promocionaste")
+        notaf = Math.round((nota1 + nota2)/2);
+    }
+    mensajef = alert(`la nota final de ${nombre} es ${notaf}`);
+}
+
 promediador();
+mensaje();
